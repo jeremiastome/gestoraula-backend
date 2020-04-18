@@ -16,8 +16,11 @@ public class Curso {
 
     private String nombre;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Alumno> alumnos;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Asistencia> asistencias;
 
     public Curso() {}
 }

@@ -3,18 +3,19 @@ package com.tip.alumnos.model;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Entity
-public class Alumno {
+public class Asistencia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String nombre;
-    private String apellido;
+    private LocalDateTime fechaDeAsistencia;
+    private int alumnoId;
 
-    public Alumno() {}
+    public Asistencia() {}
 }

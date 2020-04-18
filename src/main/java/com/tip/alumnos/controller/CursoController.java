@@ -21,7 +21,6 @@ public class CursoController {
 
     @PostMapping("/cursos")
     public void crearCurso(@RequestBody Curso curso) {
-        curso.getAlumnos().forEach(x -> {x.setCurso(curso);});
         cursoRepository.save(curso);
     }
 

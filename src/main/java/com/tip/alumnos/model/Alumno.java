@@ -17,4 +17,9 @@ public class Alumno {
     private String apellido;
 
     public Alumno() {}
+
+    public Alumno(String nombre, String apellido) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
 }

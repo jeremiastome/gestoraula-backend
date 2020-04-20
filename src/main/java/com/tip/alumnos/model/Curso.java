@@ -23,4 +23,8 @@ public class Curso {
     private List<Asistencia> asistencias;
 
     public Curso() {}
+
+    public Curso(String nombre) {
+        this.nombre = nombre;
+    }
 }

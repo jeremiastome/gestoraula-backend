@@ -13,7 +13,7 @@ public class Asistencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    private int curso_id;
     private LocalDateTime fechaDeAsistencia;
     private int alumnoId;
 

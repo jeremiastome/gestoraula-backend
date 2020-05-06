@@ -28,14 +28,13 @@ public class CursoController {
         List<Curso> cursos = cursoRepository.findAll();
         for (Curso curso : cursos) {
             CursoDTO cursoDTO = new CursoDTO();
-            cursoDTO.setId(curso.getId());
+            cursoDTO.setId(curso.getCurso_id());
             cursoDTO.setNombre(curso.getNombre());
             cursoDTO.setAlumnos(getAlumnosDTO(curso.getAlumnos(), curso.getAsistencias()));
             cursosDTO.add(cursoDTO);
         }
-
         return cursosDTO;
-}
+    }
 
     private List<AlumnoDTO> getAlumnosDTO(List<Alumno> alumnos, List<Asistencia> asistencias) {
         List<AlumnoDTO> alumnosDTO = new ArrayList<>();

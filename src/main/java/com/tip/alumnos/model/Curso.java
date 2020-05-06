@@ -12,14 +12,14 @@ public class Curso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    public int curso_id;
 
     private String nombre;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Alumno> alumnos;
+    public List<Alumno> alumnos;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="curso_id")
     private List<Asistencia> asistencias;
 
     public Curso() {}

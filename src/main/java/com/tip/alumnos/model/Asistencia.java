@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -14,7 +15,8 @@ public class Asistencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int curso_id;
-    private LocalDateTime fechaDeAsistencia;
+    @Temporal(TemporalType.DATE)
+    private Date fechaDeAsistencia;
     private int alumnoId;
 
     public Asistencia() {}

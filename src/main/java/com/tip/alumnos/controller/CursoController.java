@@ -30,33 +30,9 @@ public class CursoController {
             CursoDTO cursoDTO = new CursoDTO();
             cursoDTO.setId(curso.getCurso_id());
             cursoDTO.setNombre(curso.getNombre());
-            cursoDTO.setAlumnos(getAlumnosDTO(curso.getAlumnos(), curso.getAsistencias()));
             cursosDTO.add(cursoDTO);
         }
         return cursosDTO;
-    }
-
-    private List<AlumnoDTO> getAlumnosDTO(List<Alumno> alumnos, List<Asistencia> asistencias) {
-        List<AlumnoDTO> alumnosDTO = new ArrayList<>();
-        for (Alumno alumno : alumnos) {
-            AlumnoDTO alumnoDTO = new AlumnoDTO();
-            alumnoDTO.setId(alumno.getId());
-            alumnoDTO.setNombre(alumno.getNombre());
-            alumnoDTO.setApellido(alumno.getApellido());
-            alumnoDTO.setAsistencia(getAsistencia(alumno.getId(), asistencias));
-            alumnosDTO.add(alumnoDTO);
-        }
-
-        return alumnosDTO;
-    }
-
-    private Asistencia getAsistencia(int id, List<Asistencia> asistencias) {
-        for (Asistencia asistencia : asistencias) {
-            if(id == asistencia.getAlumnoId()) {
-                return asistencia;
-            }
-        }
-        return null;
     }
 
     @PostMapping("/cursos")

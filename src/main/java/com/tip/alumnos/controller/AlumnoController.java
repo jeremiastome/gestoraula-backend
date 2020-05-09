@@ -35,6 +35,17 @@ public class AlumnoController {
         return getAlumnosDTO(curso.getAlumnos(), response);
     }
 
+    @GetMapping("/alumnosDeCurso/{cursoId}")
+    public List<Alumno> alumnos(@PathVariable int cursoId) {
+        List<Alumno> alumnos = new ArrayList<>();
+        List<Curso> response = cursoRepository.findByCurso(cursoId);
+        for (Curso c :response) {
+            alumnos.addAll(c.getAlumnos());
+        }
+        return alumnos;
+    }
+
+
     private List<AlumnoDTO> getAlumnosDTO(List<Alumno> alumnos, List<Asistencia> asistencias) {
         List<AlumnoDTO> alumnosDTO = new ArrayList<>();
         for (Alumno alumno : alumnos) {

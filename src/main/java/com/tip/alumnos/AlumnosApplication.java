@@ -38,14 +38,15 @@ public class AlumnosApplication {
             alumnos.add(new Alumno("Alberto", "Fernandez"));
             alumnos.add(new Alumno("Roger", "Federer"));
             alumnos.add(new Alumno("Susana", "Gimenez"));
-            alumnos.add(new Alumno("Mirtha", "Legrand"));
-            alumnos.add(new Alumno("Juan", "Perez"));
-            alumnos.add(new Alumno("Matias", "Cava"));
-            alumnos.add(new Alumno("Andres", "Cruz"));
-            alumnos.add(new Alumno("Gastón", "Veliez"));
+            List<Alumno> alumnos2 = new ArrayList<>();
+            alumnos2.add(new Alumno("Mirtha", "Legrand"));
+            alumnos2.add(new Alumno("Juan", "Perez"));
+            alumnos2.add(new Alumno("Matias", "Cava"));
+            alumnos2.add(new Alumno("Andres", "Cruz"));
+            alumnos2.add(new Alumno("Gastón", "Veliez"));
 
             curso1.setAlumnos(alumnos);
-
+            curso2.setAlumnos(alumnos2);
             iCursoRepositorym.save(curso1);
             iCursoRepositorym.save(curso2);
             iCursoRepositorym.save(curso3);

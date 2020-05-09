@@ -11,5 +11,4 @@ public interface IAsistenciaRepository extends JpaRepository<Asistencia, Integer
 
     @Query("SELECT a FROM Asistencia a WHERE a.curso_id = :cursoId AND a.fechaDeAsistencia = :fecha")
     List<Asistencia> findByDate(int cursoId, Date fecha);
-
 }

@@ -2,6 +2,8 @@ package com.tip.alumnos.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,7 +17,6 @@ public class Curso {
     public int curso_id;
 
     private String nombre;
-
     @ManyToMany(cascade = CascadeType.ALL)
     public List<Alumno> alumnos;
 

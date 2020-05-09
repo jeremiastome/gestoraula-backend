@@ -5,14 +5,12 @@ import com.tip.alumnos.DTO.CursoDTO;
 import com.tip.alumnos.model.Alumno;
 import com.tip.alumnos.model.Asistencia;
 import com.tip.alumnos.model.Curso;
-import com.tip.alumnos.repository.IAlumnoRepository;
 import com.tip.alumnos.repository.ICursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -20,7 +18,6 @@ public class CursoController {
 
     @Autowired
     private ICursoRepository cursoRepository;
-    private IAlumnoRepository alumnoRepository;
 
     @GetMapping("/cursos")
     public List<CursoDTO> cursos() {

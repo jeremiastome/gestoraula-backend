@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class AlumnoController {
 
@@ -26,7 +27,7 @@ public class AlumnoController {
     private IAsistenciaRepository asistenciaRepository;
 
     @GetMapping("/alumnos/{cursoId}")
-    public List<AlumnoDTO> alumnos(@PathVariable int cursoId, @RequestParam String fecha) {
+    public List<AlumnoDTO> alumnosDeCurso(@PathVariable int cursoId, @RequestParam String fecha) {
         Date aDate = new Date(Long.parseLong(fecha));
         List<Asistencia> response = asistenciaRepository.findByDate(cursoId, aDate);
         Optional<Curso> cursoOp = cursoRepository.findById(cursoId);
@@ -55,5 +56,15 @@ public class AlumnoController {
             }
         }
         return null;
+    }
+
+    @GetMapping("/alumnos")
+    public List<Alumno> alumnos() {
+        return alumnoRepository.findAll();
+    }
+
+    @PostMapping("/alumnos")
+    public void crearAlumno(@RequestBody Alumno alumno) {
+        alumnoRepository.save(alumno);
     }
 }

@@ -17,7 +17,7 @@ public class Curso {
     public int curso_id;
 
     private String nombre;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     public List<Alumno> alumnos;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="curso_id")

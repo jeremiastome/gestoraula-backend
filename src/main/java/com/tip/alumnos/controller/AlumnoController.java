@@ -10,10 +10,7 @@ import com.tip.alumnos.repository.ICursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -36,12 +33,13 @@ public class AlumnoController {
     }
 
     @GetMapping("/alumnosDeCurso/{cursoId}")
-    public List<Alumno> alumnos(@PathVariable int cursoId) {
-        List<Alumno> alumnos = new ArrayList<>();
-        List<Curso> response = cursoRepository.findByCurso(cursoId);
-        for (Curso c :response) {
-            alumnos.addAll(c.getAlumnos());
+    public List<Alumno> getAlumnos(@PathVariable int cursoId) {
+        Set<Integer> ids = new HashSet<Integer>();
+        Optional<Curso> curso = cursoRepository.findById(cursoId);
+        for(Alumno a : curso.get().getAlumnos()) {
+            ids.add(a.getId());
         }
+        List<Alumno> alumnos = alumnoRepository.findByCurso(ids);
         return alumnos;
     }
 

@@ -9,7 +9,4 @@ import java.util.List;
 
 public interface ICursoRepository extends JpaRepository<Curso, Integer> {
 
-    @Query("SELECT a FROM Curso a WHERE a.id != :cursoId")
-    List<Curso> findByCurso(int cursoId);
-
 }

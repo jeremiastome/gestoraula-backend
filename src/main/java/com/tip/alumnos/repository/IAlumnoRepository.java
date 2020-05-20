@@ -7,9 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public interface IAlumnoRepository extends JpaRepository<Alumno, Integer> {
 
-    @Query("SELECT a FROM Alumno a WHERE a.id NOT IN (SELECT b.alumnos FROM Curso b WHERE b.curso_id != :cursoId)")
-    List<Alumno> findByCurso(int cursoId);
+    @Query("SELECT a FROM Alumno a WHERE a.id NOT IN :ids")
+    List<Alumno> findByCurso(Set<Integer> ids);
 }

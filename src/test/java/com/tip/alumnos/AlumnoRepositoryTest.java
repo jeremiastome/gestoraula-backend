@@ -33,6 +33,4 @@ class AlumnoRepositoryTest {
 
         assertEquals(10, alumnos.size());
     }
-
-
 }

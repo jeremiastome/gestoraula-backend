@@ -13,8 +13,9 @@ env:
 
 services:
   - postgresql
-  
-before_script:
+
+before_install:
+  - chmod +x mvnw
   - psql -c "CREATE DATABASE alumnostip;" -U postgres
   
 install:

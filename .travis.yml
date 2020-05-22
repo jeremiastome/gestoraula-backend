@@ -3,7 +3,11 @@ language: java
 sudo: required
 jdk:
   - openjdk8
-
+  
+cache: 
+  directories:
+    - $HOME/.m2
+    
 env:
   -DATABASE_URL=postgres://postgres:postgres@localhost:5432/alumnostip
 

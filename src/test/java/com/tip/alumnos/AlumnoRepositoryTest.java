@@ -19,7 +19,7 @@ import java.util.List;
 class AlumnoRepositoryTest {
 
     @Autowired
-    private IAlumnoRepository alumnoRepository;
+    public IAlumnoRepository alumnoRepository;
 
     @Test
     void testBefore() {

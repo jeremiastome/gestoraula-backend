@@ -39,7 +39,13 @@ public class AlumnoController {
         for(Alumno a : curso.get().getAlumnos()) {
             ids.add(a.getId());
         }
-        List<Alumno> alumnos = alumnoRepository.findByCurso(ids);
+        List<Alumno> alumnos;
+        if(!ids.isEmpty()) {
+            alumnos = alumnoRepository.findByCurso(ids);
+        }
+        else {
+            alumnos = alumnoRepository.findAll();
+        }
         return alumnos;
     }
 

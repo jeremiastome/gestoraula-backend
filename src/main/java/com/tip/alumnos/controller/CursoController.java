@@ -35,6 +35,8 @@ public class CursoController {
 
     @PostMapping("/cursos")
     public void crearCurso(@RequestBody Curso curso) {
+        curso.calcularCantidadDeDiasDeClase();
+        curso.setEstado();
         cursoRepository.save(curso);
     }
 

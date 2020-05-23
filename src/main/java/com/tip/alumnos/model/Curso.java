@@ -2,9 +2,9 @@ package com.tip.alumnos.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -17,6 +17,11 @@ public class Curso {
     public int curso_id;
 
     private String nombre;
+    private Date fechaInicio;
+    private Date fechaFin;
+    private Integer cantidadDeDiasDeClase;
+    private EstadoDeCurso estado;
+
     @ManyToMany
     public List<Alumno> alumnos;
 
@@ -25,8 +30,22 @@ public class Curso {
 
     public Curso() {}
 
-    public Curso(String nombre) {
+    public Curso(String nombre, Date fechaInicio, Date fechaFin) {
         this.nombre = nombre;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
     }
 
+    public void calcularCantidadDeDiasDeClase() {
+        cantidadDeDiasDeClase = DateUtils.getClassDays(fechaInicio, fechaFin);
+    }
+
+    public void setEstado() {
+        if(fechaFin.after(new Date())) {
+            estado = EstadoDeCurso.EnCurso;
+        }
+        else {
+            estado = EstadoDeCurso.Finalizado;
+        }
+    }
 }

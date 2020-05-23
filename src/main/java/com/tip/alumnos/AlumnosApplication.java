@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @SpringBootApplication
@@ -21,16 +22,23 @@ public class AlumnosApplication {
     @Bean
     ApplicationRunner applicationRunner(ICursoRepository iCursoRepositorym, IAlumnoRepository iAlumnoRepository) {
 
+        Date fechaInicio = new Date();
+        Date fechaFin = fechaInicio;
         return args -> {
-            Curso curso1 = new Curso("1° A");
-            Curso curso2 = new Curso("1° B");
-            Curso curso3 = new Curso("1° C");
-            Curso curso4 = new Curso("2° A");
-            Curso curso5 = new Curso("2° B");
-            Curso curso6 = new Curso("2° C");
-            Curso curso7 = new Curso("3° A");
-            Curso curso8 = new Curso("3° B");
-            Curso curso9 = new Curso("3° C");
+            Curso curso1 = new Curso("1° A", fechaInicio, fechaFin);
+            Curso curso2 = new Curso("1° B", fechaInicio, fechaFin);
+            Curso curso3 = new Curso("1° C", fechaInicio, fechaFin);
+            Curso curso4 = new Curso("2° A", fechaInicio, fechaFin);
+            Curso curso5 = new Curso("2° B", fechaInicio, fechaFin);
+            Curso curso6 = new Curso("2° C", fechaInicio, fechaFin);
+            Curso curso7 = new Curso("3° A", fechaInicio, fechaFin);
+            Curso curso8 = new Curso("3° B", fechaInicio, fechaFin);
+            Curso curso9 = new Curso("3° C", fechaInicio, fechaFin);
+            Curso curso10 = new Curso("4° B", fechaInicio, fechaFin);
+            Curso curso11 = new Curso("4° C", fechaInicio, fechaFin);
+            Curso curso12 = new Curso("5° B", fechaInicio, fechaFin);
+            Curso curso13 = new Curso("5° C", fechaInicio, fechaFin);
+
             List<Alumno> alumnos = new ArrayList<>();
             alumnos.add(new Alumno("Ricardo", "Fort"));
             alumnos.add(new Alumno("Alberto", "Fernandez"));
@@ -55,6 +63,10 @@ public class AlumnosApplication {
             iCursoRepositorym.save(curso7);
             iCursoRepositorym.save(curso8);
             iCursoRepositorym.save(curso9);
+            iCursoRepositorym.save(curso10);
+            iCursoRepositorym.save(curso11);
+            iCursoRepositorym.save(curso12);
+            iCursoRepositorym.save(curso13);
         };
     }
 }

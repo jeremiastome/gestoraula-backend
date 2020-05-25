@@ -26,7 +26,7 @@ class AlumnoRepositoryTest {
     }
 
     @Test
-    public void itShouldGetAllAlumns() {
+    public void itShouldGetAllStudents() {
         Alumno alumnoTest = new Alumno("Roger", "Federer");
         alumnoRepository.save(alumnoTest);
         List<Alumno> alumnos = alumnoRepository.findAll();

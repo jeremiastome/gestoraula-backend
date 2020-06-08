@@ -20,6 +20,7 @@ public class Usuario {
     private String nombre;
     private String apellido;
     private String email;
+    private RolDeUsuario rol;
 
     public Usuario() {}
 }

@@ -1,5 +1,6 @@
 package com.tip.alumnos.controller;
 
+import com.tip.alumnos.model.RolDeUsuario;
 import com.tip.alumnos.model.Usuario;
 import com.tip.alumnos.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,16 @@ public class UsuarioController {
         return usuarioRepository.findAll();
     }
 
-    @GetMapping("/usuarios/{email}")
-    public Boolean usuarioConMail(@PathVariable String email) {
-        return usuarioRepository.findByEmail(email) == null;
+    @GetMapping("/usuarios/{rol}")
+    public Boolean usuarioConMail(@PathVariable String rol, @RequestParam String email) {
+        RolDeUsuario rolEnum = RolDeUsuario.valueOf(rol);
+        return usuarioRepository.findByEmail(email, rolEnum) == null;
     }
 
     @PostMapping("/usuarios")
     public void crearUsuario(@RequestBody Usuario usuario) {
-        if(usuarioRepository.findByEmail(usuario.getEmail()) == null); {
+        RolDeUsuario rol = usuario.getRol();
+        if(usuarioRepository.findByEmail(usuario.getEmail(), rol)  == null); {
             usuarioRepository.save(usuario);
         }
     }

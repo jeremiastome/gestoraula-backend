@@ -24,23 +24,25 @@ public class AlumnosApplication {
 
         Date fechaInicio = new Date();
         Date fechaFin = fechaInicio;
+        String email = "jeremias.tome1@gmail.com";
         return args -> {
-            Curso curso1 = new Curso("1° A", fechaInicio, fechaFin);
-            Curso curso2 = new Curso("1° B", fechaInicio, fechaFin);
-            Curso curso3 = new Curso("1° C", fechaInicio, fechaFin);
-            Curso curso4 = new Curso("2° A", fechaInicio, fechaFin);
-            Curso curso5 = new Curso("2° B", fechaInicio, fechaFin);
-            Curso curso6 = new Curso("2° C", fechaInicio, fechaFin);
-            Curso curso7 = new Curso("3° A", fechaInicio, fechaFin);
-            Curso curso8 = new Curso("3° B", fechaInicio, fechaFin);
-            Curso curso9 = new Curso("3° C", fechaInicio, fechaFin);
-            Curso curso10 = new Curso("4° B", fechaInicio, fechaFin);
-            Curso curso11 = new Curso("4° C", fechaInicio, fechaFin);
-            Curso curso12 = new Curso("5° B", fechaInicio, fechaFin);
-            Curso curso13 = new Curso("5° C", fechaInicio, fechaFin);
+            Curso curso1 = new Curso("1° A", fechaInicio, fechaFin, email);
+            Curso curso2 = new Curso("1° B", fechaInicio, fechaFin, email);
+            Curso curso3 = new Curso("1° C", fechaInicio, fechaFin, email);
+            Curso curso4 = new Curso("2° A", fechaInicio, fechaFin, email);
+            Curso curso5 = new Curso("2° B", fechaInicio, fechaFin, email);
+            Curso curso6 = new Curso("2° C", fechaInicio, fechaFin, email);
+            Curso curso7 = new Curso("3° A", fechaInicio, fechaFin, email);
+            Curso curso8 = new Curso("3° B", fechaInicio, fechaFin, email);
+            Curso curso9 = new Curso("3° C", fechaInicio, fechaFin, email);
+            Curso curso10 = new Curso("4° B", fechaInicio, fechaFin, email);
+            Curso curso11 = new Curso("4° C", fechaInicio, fechaFin, email);
+            Curso curso12 = new Curso("5° B", fechaInicio, fechaFin, email);
+            Curso curso13 = new Curso("5° C", fechaInicio, fechaFin, email);
 
             List<Alumno> alumnos = new ArrayList<>();
             alumnos.add(new Alumno("Ricardo", "Fort"));
+            alumnos.get(0).setEmailContacto("jeremias.tome1@gmail.com");
             alumnos.add(new Alumno("Alberto", "Fernandez"));
             alumnos.add(new Alumno("Roger", "Federer"));
             alumnos.add(new Alumno("Susana", "Gimenez"));

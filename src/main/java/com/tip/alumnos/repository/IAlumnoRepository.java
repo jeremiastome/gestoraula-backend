@@ -14,4 +14,7 @@ public interface IAlumnoRepository extends JpaRepository<Alumno, Integer> {
 
     @Query("SELECT a FROM Alumno a WHERE a.id NOT IN :ids")
     List<Alumno> findByCurso(Set<Integer> ids);
+
+    @Query("SELECT a FROM Alumno a WHERE a.emailContacto = :email")
+    List<Alumno> findByEmail(String email);
 }

@@ -78,6 +78,12 @@ public class AlumnoController {
         return alumnoRepository.findAll();
     }
 
+    @GetMapping("/alumnosRegistrados/{email}")
+    public List<Alumno> alumnos(@PathVariable String email) {
+
+        return alumnoRepository.findByEmail(email);
+    }
+
     @PostMapping("/alumnos")
     public void crearAlumno(@RequestBody Alumno alumno) {
         alumnoRepository.save(alumno);

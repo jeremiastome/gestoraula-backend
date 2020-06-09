@@ -20,10 +20,10 @@ public class CursoController {
     @Autowired
     private ICursoRepository cursoRepository;
 
-    @GetMapping("/cursos")
-    public List<CursoDTO> cursos() {
+    @GetMapping("/cursos/{email}")
+    public List<CursoDTO> cursos(@PathVariable String email) {
         List<CursoDTO> cursosDTO = new ArrayList<>();
-        List<Curso> cursos = cursoRepository.findAll();
+        List<Curso> cursos = cursoRepository.findByEmail(email);
         for (Curso curso : cursos) {
             CursoDTO cursoDTO = new CursoDTO();
             cursoDTO.setId(curso.getCurso_id());

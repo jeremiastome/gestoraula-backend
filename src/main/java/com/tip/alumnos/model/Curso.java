@@ -21,6 +21,7 @@ public class Curso {
     private Date fechaFin;
     private Integer cantidadDeDiasDeClase;
     private EstadoDeCurso estado;
+    private String emailDocente;
 
     @ManyToMany
     public List<Alumno> alumnos;
@@ -30,8 +31,9 @@ public class Curso {
 
     public Curso() {}
 
-    public Curso(String nombre, Date fechaInicio, Date fechaFin) {
+    public Curso(String nombre, Date fechaInicio, Date fechaFin, String email) {
         this.nombre = nombre;
+        this.emailDocente = email;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
     }

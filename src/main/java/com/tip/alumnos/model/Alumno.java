@@ -17,6 +17,8 @@ public class Alumno {
     private String apellido;
     private Integer dni;
 
+    private String emailContacto;
+
 
     public Alumno() {}
 

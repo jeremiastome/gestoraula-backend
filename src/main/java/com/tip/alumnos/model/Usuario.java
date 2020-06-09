@@ -3,10 +3,7 @@ package com.tip.alumnos.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -20,6 +17,8 @@ public class Usuario {
     private String nombre;
     private String apellido;
     private String email;
+
+    @Enumerated(EnumType.STRING)
     private RolDeUsuario rol;
 
     public Usuario() {}

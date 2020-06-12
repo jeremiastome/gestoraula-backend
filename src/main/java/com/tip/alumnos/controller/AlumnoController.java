@@ -89,4 +89,18 @@ public class AlumnoController {
         alumnoRepository.save(alumno);
         alumno.enviarMailConfirmacion(alumno);
     }
+
+    @PutMapping("/removerAlumno/{cursoId}")
+    public void removerDeCurso(@PathVariable Integer cursoId, @RequestParam Integer alumnoId) {
+        Optional<Curso> cursoOp = cursoRepository.findById(cursoId);
+        Curso curso = cursoOp.get();
+        List<Alumno> alumnos = new ArrayList<Alumno>();
+        for(Alumno a : curso.getAlumnos()) {
+            if(alumnoId != a.getId()) {
+                alumnos.add(a);
+            }
+        }
+        curso.setAlumnos(alumnos);
+        cursoRepository.save(curso);
+    }
 }

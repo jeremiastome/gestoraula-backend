@@ -87,5 +87,6 @@ public class AlumnoController {
     @PostMapping("/alumnos")
     public void crearAlumno(@RequestBody Alumno alumno) {
         alumnoRepository.save(alumno);
+        alumno.enviarMailConfirmacion(alumno);
     }
 }

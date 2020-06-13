@@ -17,4 +17,7 @@ public interface IAlumnoRepository extends JpaRepository<Alumno, Integer> {
 
     @Query("SELECT a FROM Alumno a WHERE a.emailContacto = :email")
     List<Alumno> findByEmail(String email);
+
+    @Query("SELECT a FROM Alumno a WHERE a.dni = :dni")
+    Alumno findByDni(Integer dni);
 }

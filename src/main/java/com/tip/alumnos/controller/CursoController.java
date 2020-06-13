@@ -34,10 +34,11 @@ public class CursoController {
     }
 
     @PostMapping("/cursos")
-    public void crearCurso(@RequestBody Curso curso) {
+    public Curso crearCurso(@RequestBody Curso curso) {
         curso.calcularCantidadDeDiasDeClase();
         curso.setEstado();
-        cursoRepository.save(curso);
+        Curso nuevoCurso = cursoRepository.saveAndFlush(curso);
+        return nuevoCurso;
     }
 
     @PutMapping("/cursos/{id}")

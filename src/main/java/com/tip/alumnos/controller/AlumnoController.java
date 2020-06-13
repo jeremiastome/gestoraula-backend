@@ -8,6 +8,10 @@ import com.tip.alumnos.repository.IAlumnoRepository;
 import com.tip.alumnos.repository.IAsistenciaRepository;
 import com.tip.alumnos.repository.ICursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -80,18 +84,46 @@ public class AlumnoController {
 
     @GetMapping("/alumnosRegistrados/{email}")
     public List<Alumno> alumnos(@PathVariable String email) {
-
         return alumnoRepository.findByEmail(email);
     }
 
     @PostMapping("/alumnos")
-    public void crearAlumno(@RequestBody Alumno alumno) {
-        alumnoRepository.save(alumno);
+    public ResponseEntity crearAlumno(@RequestBody Alumno alumno) {
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+        if(alumnoRepository.findByDni(alumno.getDni())  == null) {
+            alumnoRepository.save(alumno);
+        }
+        else {
+            return new ResponseEntity<String>(
+                    "Ya existe un alumno con el número de documento ingresado",
+                    headers,
+                    HttpStatus.CONFLICT
+            );
+        }
+        Alumno nuevoalumno = alumnoRepository.findByDni(alumno.getDni());
         alumno.enviarMailConfirmacion(alumno);
+        return new ResponseEntity<Alumno>(
+                nuevoalumno,
+                headers,
+                HttpStatus.OK
+        );
+    }
+
+    @PutMapping("/alumnos/{emailContacto}")
+    public Alumno actualizarAlumno(@RequestBody Alumno alumno, @PathVariable String emailContacto) {
+        alumnoRepository.save(alumno);
+        if(emailContacto != alumno.getEmailContacto()) {
+            alumno.enviarMailConfirmacion(alumno);
+        }
+        return alumno;
     }
 
     @PutMapping("/removerAlumno/{cursoId}")
     public void removerDeCurso(@PathVariable Integer cursoId, @RequestParam Integer alumnoId) {
+        remover(cursoId, alumnoId);
+    }
+
+    public void remover(Integer cursoId, Integer alumnoId) {
         Optional<Curso> cursoOp = cursoRepository.findById(cursoId);
         Curso curso = cursoOp.get();
         List<Alumno> alumnos = new ArrayList<Alumno>();
@@ -101,6 +133,10 @@ public class AlumnoController {
             }
         }
         curso.setAlumnos(alumnos);
+
+        List<Asistencia> asistencias = asistenciaRepository.findByAlumno(alumnoId);
+        asistenciaRepository.deleteAll(asistencias);
+
         cursoRepository.save(curso);
     }
 }

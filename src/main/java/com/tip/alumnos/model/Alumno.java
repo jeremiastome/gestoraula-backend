@@ -20,7 +20,8 @@ public class Alumno {
     private Integer dni;
 
     private String emailContacto;
-
+    private Integer telefono;
+    private Integer telefonoMovil;
 
     public Alumno() {}
 

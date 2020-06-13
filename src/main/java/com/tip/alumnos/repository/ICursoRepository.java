@@ -14,4 +14,6 @@ public interface ICursoRepository extends JpaRepository<Curso, Integer> {
     @Query("SELECT c FROM Curso c WHERE c.emailDocente = :email")
     List<Curso> findByEmail(String email);
 
+    @Query("SELECT c FROM Curso c JOIN c.alumnos a WHERE a.id =:idAlumno")
+    List<Curso> findByAlumno(String idAlumno);
 }

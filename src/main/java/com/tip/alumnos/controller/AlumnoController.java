@@ -110,12 +110,28 @@ public class AlumnoController {
     }
 
     @PutMapping("/alumnos/{emailContacto}")
-    public Alumno actualizarAlumno(@RequestBody Alumno alumno, @PathVariable String emailContacto) {
-        alumnoRepository.save(alumno);
+    public ResponseEntity actualizarAlumno(@RequestBody Alumno alumno, @PathVariable String emailContacto, @RequestParam Integer dni) {
+        Alumno alumnoActualizado;
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+        if(alumno.getDni() != dni && alumnoRepository.findByDni(alumno.getDni()) == null) {
+            alumnoActualizado = alumnoRepository.saveAndFlush(alumno);
+        }
+        else {
+            return new ResponseEntity<String>(
+                    "Ya existe un alumno con el número de documento ingresado",
+                    headers,
+                    HttpStatus.CONFLICT
+            );
+        }
+
         if(emailContacto != alumno.getEmailContacto()) {
             alumno.enviarMailConfirmacion(alumno);
         }
-        return alumno;
+        return new ResponseEntity<Alumno>(
+                alumnoActualizado,
+                headers,
+                HttpStatus.OK
+        );
     }
 
     @PutMapping("/removerAlumno/{cursoId}")

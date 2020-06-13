@@ -22,11 +22,16 @@ class AlumnoRepositoryTest {
     public IAlumnoRepository alumnoRepository;
 
     @Test
-    void testBefore() {
+    public void itShouldGetAllStudents() {
+        Alumno alumnoTest = new Alumno("Roger", "Federer");
+        alumnoRepository.save(alumnoTest);
+        List<Alumno> alumnos = alumnoRepository.findAll();
+
+        assertEquals(1, alumnos.size());
+        assertEquals(1, alumnos.get(0));
     }
 
-    @Test
-    public void itShouldGetAllStudents() {
+    public void clearData() {
         Alumno alumnoTest = new Alumno("Roger", "Federer");
         alumnoRepository.save(alumnoTest);
         List<Alumno> alumnos = alumnoRepository.findAll();

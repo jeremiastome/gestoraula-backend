@@ -23,6 +23,9 @@ public class Curso {
     private EstadoDeCurso estado;
     private String emailDocente;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Post> comunicaciones;
+
     @ManyToMany
     public List<Alumno> alumnos;
 

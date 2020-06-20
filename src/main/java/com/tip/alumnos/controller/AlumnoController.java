@@ -110,10 +110,10 @@ public class AlumnoController {
     }
 
     @PutMapping("/alumnos/{emailContacto}")
-    public ResponseEntity actualizarAlumno(@RequestBody Alumno alumno, @PathVariable String emailContacto, @RequestParam Integer dni) {
+    public ResponseEntity actualizarAlumno(@RequestBody Alumno alumno, @PathVariable String emailContacto, @RequestParam String dni) {
         Alumno alumnoActualizado;
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-        if(alumno.getDni() != dni && alumnoRepository.findByDni(alumno.getDni()) == null) {
+        if(String.valueOf(alumno.getDni()) != String.valueOf(dni) && alumnoRepository.findByDni(alumno.getDni()) == null) {
             alumnoActualizado = alumnoRepository.saveAndFlush(alumno);
         }
         else {

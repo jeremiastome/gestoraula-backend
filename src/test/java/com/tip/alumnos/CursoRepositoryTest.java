@@ -1,7 +1,9 @@
+
 package com.tip.alumnos;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.tip.alumnos.model.Alumno;
+import com.tip.alumnos.model.Curso;
 import com.tip.alumnos.repository.IAlumnoRepository;
 import com.tip.alumnos.repository.ICursoRepository;
 import org.junit.jupiter.api.Test;
@@ -11,12 +13,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ContextConfiguration(initializers = {MyApplicationContextInitializer.class})
-class AlumnoRepositoryTest {
+class CursoRepositoryTest {
 
     @Autowired
     public IAlumnoRepository alumnoRepository;
@@ -24,37 +27,22 @@ class AlumnoRepositoryTest {
     public ICursoRepository cursoRepository;
 
     @Test
-    public void itShouldGetAllStudents() {
+    public void getClassAssociatedWithATeacher() {
         clearData();
-        Alumno alumnoTest = new Alumno("Roger", "Federer");
-        alumnoRepository.save(alumnoTest);
-        List<Alumno> alumnos = alumnoRepository.findAll();
-
-        assertEquals(1, alumnos.size());
-        assertEquals("Roger", alumnos.get(0).getNombre());
-        assertEquals("Federer", alumnos.get(0).getApellido());
-    }
-
-    @Test
-    public void itShouldFindForTheStudentsByEmail() {
-        clearData();
+        Date fechaInicio = new Date();
+        Date fechaFin = fechaInicio;
         String email = "mail1@gmail.com";
-
-        Alumno alumnoTest = new Alumno("Roger", "Federer");
-        alumnoTest.setEmailContacto(email);
-        alumnoRepository.save(alumnoTest);
-
         String email2 = "mail12@gmail.com";
+        Curso curso1 = new Curso("1° A", fechaInicio, fechaFin, email);
+        Curso curso2 = new Curso("1° B", fechaInicio, fechaFin, email);
+        Curso curso3 = new Curso("1° C", fechaInicio, fechaFin, email2);
+        cursoRepository.save(curso1);
+        cursoRepository.save(curso2);
+        cursoRepository.save(curso3);
 
-        Alumno alumnoTest2 = new Alumno("Roger", "Federer");
-        alumnoTest.setEmailContacto(email2);
-        alumnoRepository.save(alumnoTest2);
+        List<Curso> cursos = cursoRepository.findByEmail(email);
 
-        List<Alumno> alumnos = alumnoRepository.findByEmail(email);
-
-        assertEquals(1, alumnos.size());
-        assertEquals("Roger", alumnos.get(0).getNombre());
-        assertEquals("Federer", alumnos.get(0).getApellido());
+        assertEquals(2, cursos.size());
     }
 
 

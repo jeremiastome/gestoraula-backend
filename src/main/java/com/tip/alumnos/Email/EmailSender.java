@@ -1,5 +1,10 @@
 package com.tip.alumnos.Email;
 
+import org.apache.commons.io.IOUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.Session;
@@ -8,6 +13,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.StringWriter;
 import java.util.Properties;
 
 public class EmailSender {
@@ -46,7 +54,14 @@ public class EmailSender {
             message.setFrom(new InternetAddress(mail.getUser()));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(mail.getReceiver()));
             message.setSubject(mail.getSubject());
-            message.setContent(multi);
+            File input = new File("Template.html");
+            Document doc = Jsoup.parse(input, "UTF-8", "");
+            Element contenido = doc.select(".contenido").first();
+            contenido.text(mail.getMessage());
+            String template = doc.html();
+            //StringWriter writer = new StringWriter();
+            //IOUtils.copy(new FileInputStream(template), writer);
+            message.setContent(template, "text/html");
 
             Transport t = s.getTransport("smtp");
             t.connect(mail.getUser(), mail.getPassword());

@@ -6,6 +6,7 @@ import com.tip.alumnos.model.Alumno;
 import com.tip.alumnos.model.Curso;
 import com.tip.alumnos.repository.IAlumnoRepository;
 import com.tip.alumnos.repository.ICursoRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,14 @@ class CursoRepositoryTest {
     @Autowired
     public ICursoRepository cursoRepository;
 
+    @BeforeEach
+    public void setup() {
+        cursoRepository.deleteAll();
+        alumnoRepository.deleteAll();
+    }
+
     @Test
     public void getClassAssociatedWithATeacher() {
-        clearData();
         Date fechaInicio = new Date();
         Date fechaFin = fechaInicio;
         String email = "mail1@gmail.com";
@@ -43,11 +49,5 @@ class CursoRepositoryTest {
         List<Curso> cursos = cursoRepository.findByEmail(email);
 
         assertEquals(2, cursos.size());
-    }
-
-
-    public void clearData() {
-        cursoRepository.deleteAll();
-        alumnoRepository.deleteAll();
     }
 }

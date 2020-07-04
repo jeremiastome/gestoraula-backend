@@ -105,7 +105,7 @@ public class AlumnoController {
         return new ResponseEntity<Alumno>(
                 nuevoalumno,
                 headers,
-                HttpStatus.OK
+                HttpStatus.CREATED
         );
     }
 

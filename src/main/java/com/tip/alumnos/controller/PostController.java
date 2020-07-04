@@ -1,5 +1,6 @@
 package com.tip.alumnos.controller;
 
+import com.tip.alumnos.model.Alumno;
 import com.tip.alumnos.model.Curso;
 import com.tip.alumnos.model.Post;
 import com.tip.alumnos.repository.ICursoRepository;
@@ -39,6 +40,9 @@ public class PostController {
         Optional <Curso> cursoOp = cursoRepository.findById(cursoId);
         Curso curso = cursoOp.get();
         curso.getComunicaciones().add(post);
+        for(Alumno a : curso.getAlumnos()) {
+            a.enviarMailConfirmacionNotificacion(a, curso.getNombre(), post.getCuerpo());
+        }
         cursoRepository.save(curso);
     }
 

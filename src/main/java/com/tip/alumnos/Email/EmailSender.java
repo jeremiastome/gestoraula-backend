@@ -57,10 +57,14 @@ public class EmailSender {
             File input = new File("Template.html");
             Document doc = Jsoup.parse(input, "UTF-8", "");
             Element contenido = doc.select(".contenido").first();
+            Element remover = doc.select(".remover").first();
+            Element alta = doc.select(".alta").first();
+            Element comunicacion = doc.select(".comunicacion").first();
             contenido.text(mail.getMessage());
+            remover.text(mail.getSubject());
+            alta.text(mail.getSubject());
+            comunicacion.text(mail.getSubject());
             String template = doc.html();
-            //StringWriter writer = new StringWriter();
-            //IOUtils.copy(new FileInputStream(template), writer);
             message.setContent(template, "text/html");
 
             Transport t = s.getTransport("smtp");

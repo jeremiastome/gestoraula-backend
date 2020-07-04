@@ -40,4 +40,28 @@ public class Alumno {
 
         emailSender.sendEmail((emailAlumno));
     }
+
+    public void enviarMailConfirmacionDeEliminacion(Alumno alumno, String nombreCurso) {
+        Email emailAlumno = new Email();
+
+        emailAlumno.createEmailWith("Alumno removido", alumno.getEmailContacto(),"El alumno "
+                + alumno.getNombre() + " " + alumno.getApellido() + " " + "fue removido correctamente del Curso "
+                + nombreCurso + ".");
+
+        EmailSender emailSender = EmailSender.getInstance();
+
+        emailSender.sendEmail((emailAlumno));
+    }
+
+    public void enviarMailConfirmacionNotificacion(Alumno alumno, String nombreCurso, String comunicacion) {
+        Email emailAlumno = new Email();
+
+        emailAlumno.createEmailWith("Nueva comunicación", alumno.getEmailContacto(),"Una nueva "
+                + "comunicación para el Curso " + nombreCurso + " " + "fue creada con la siguiente información: "
+                + comunicacion);
+
+        EmailSender emailSender = EmailSender.getInstance();
+
+        emailSender.sendEmail((emailAlumno));
+    }
 }

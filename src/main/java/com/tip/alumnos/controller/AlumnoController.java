@@ -105,7 +105,7 @@ public class AlumnoController {
         return new ResponseEntity<Alumno>(
                 nuevoalumno,
                 headers,
-                HttpStatus.OK
+                HttpStatus.CREATED
         );
     }
 
@@ -146,6 +146,8 @@ public class AlumnoController {
         for(Alumno a : curso.getAlumnos()) {
             if(alumnoId != a.getId()) {
                 alumnos.add(a);
+            } else {
+                a.enviarMailConfirmacionDeEliminacion(a, curso.getNombre());
             }
         }
         curso.setAlumnos(alumnos);

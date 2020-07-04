@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.tip.alumnos.model.Alumno;
 import com.tip.alumnos.repository.IAlumnoRepository;
 import com.tip.alumnos.repository.ICursoRepository;
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +26,14 @@ class AlumnoRepositoryTest {
     @Autowired
     public ICursoRepository cursoRepository;
 
+    @BeforeEach
+    public void setup() {
+        cursoRepository.deleteAll();
+        alumnoRepository.deleteAll();
+    }
+
     @Test
     public void itShouldGetAllStudents() {
-        clearData();
         Alumno alumnoTest = new Alumno("Roger", "Federer");
         alumnoRepository.save(alumnoTest);
         List<Alumno> alumnos = alumnoRepository.findAll();
@@ -37,7 +45,6 @@ class AlumnoRepositoryTest {
 
     @Test
     public void itShouldFindForTheStudentsByEmail() {
-        clearData();
         String email = "mail1@gmail.com";
 
         Alumno alumnoTest = new Alumno("Roger", "Federer");
@@ -55,11 +62,5 @@ class AlumnoRepositoryTest {
         assertEquals(1, alumnos.size());
         assertEquals("Roger", alumnos.get(0).getNombre());
         assertEquals("Federer", alumnos.get(0).getApellido());
-    }
-
-
-    public void clearData() {
-        cursoRepository.deleteAll();
-        alumnoRepository.deleteAll();
     }
 }

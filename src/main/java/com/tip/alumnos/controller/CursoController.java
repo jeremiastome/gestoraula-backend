@@ -2,16 +2,20 @@ package com.tip.alumnos.controller;
 
 import com.tip.alumnos.DTO.AlumnoDTO;
 import com.tip.alumnos.DTO.CursoDTO;
+import com.tip.alumnos.Email.Email;
 import com.tip.alumnos.model.Alumno;
 import com.tip.alumnos.model.Asistencia;
 import com.tip.alumnos.model.Curso;
+import com.tip.alumnos.model.Evento;
 import com.tip.alumnos.repository.IAlumnoRepository;
 import com.tip.alumnos.repository.ICursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -31,6 +35,12 @@ public class CursoController {
             cursosDTO.add(cursoDTO);
         }
         return cursosDTO;
+    }
+
+    @GetMapping("/eventos/{cursoId}")
+    public List<Evento> getEventos(@PathVariable int cursoId) {
+        Curso cursoAModificar = cursoRepository.findById(cursoId).get();
+        return cursoAModificar.getEventos();
     }
 
     @PostMapping("/cursos")
@@ -53,5 +63,31 @@ public class CursoController {
         Curso cursoAModificar = cursoRepository.findById(id).get();
         cursoAModificar.getAlumnos().addAll(alumnos);
         cursoRepository.save(cursoAModificar);
+    }
+
+    @PutMapping("/evento/{id}")
+    public List<EmailResponse> modificarEventos(@RequestBody Evento evento, @PathVariable int id) {
+        List<EmailResponse> res = new ArrayList<>();
+        Curso cursoAModificar = cursoRepository.findById(id).get();
+        cursoAModificar.getEventos().add(evento);
+        cursoRepository.save(cursoAModificar);
+        Set<String> emails = new HashSet<>();
+
+        for (Alumno alumno : cursoAModificar.getAlumnos()) {
+            if(alumno.getEmailContacto() != null && !emails.contains(alumno.getEmailContacto())) {
+                EmailResponse emailResponse = new EmailResponse(alumno.getEmailContacto());
+                res.add(emailResponse);
+            }
+        }
+        return res;
+    }
+
+
+    public class EmailResponse {
+        public String email;
+
+        public EmailResponse(String email) {
+            this.email = email;
+        }
     }
 }

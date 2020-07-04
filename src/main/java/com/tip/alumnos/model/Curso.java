@@ -32,6 +32,9 @@ public class Curso {
     @OneToMany(cascade = CascadeType.ALL, mappedBy="curso_id")
     private List<Asistencia> asistencias;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Evento> eventos;
+
     public Curso() {}
 
     public Curso(String nombre, Date fechaInicio, Date fechaFin, String email) {

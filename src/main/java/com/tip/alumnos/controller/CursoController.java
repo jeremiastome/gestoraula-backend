@@ -43,6 +43,12 @@ public class CursoController {
         return cursoAModificar.getEventos();
     }
 
+    @GetMapping("/cursosDeAlumno/{alumnoId}")
+    public List<Curso> getCursos(@PathVariable int alumnoId) {
+        List<Curso> cursos = cursoRepository.findByAlumnos(alumnoId);
+        return cursos;
+    }
+
     @PostMapping("/cursos")
     public Curso crearCurso(@RequestBody Curso curso) {
         curso.calcularCantidadDeDiasDeClase();

@@ -14,8 +14,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.StringWriter;
 import java.util.Properties;
 
 public class EmailSender {
@@ -59,8 +57,6 @@ public class EmailSender {
             Element contenido = doc.select(".contenido").first();
             contenido.text(mail.getMessage());
             String template = doc.html();
-            //StringWriter writer = new StringWriter();
-            //IOUtils.copy(new FileInputStream(template), writer);
             message.setContent(template, "text/html");
 
             Transport t = s.getTransport("smtp");

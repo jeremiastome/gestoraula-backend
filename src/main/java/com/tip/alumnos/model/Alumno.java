@@ -33,6 +33,10 @@ public class Alumno {
     public void enviarMailConfirmacion(Alumno alumno) {
         Email emailAlumno = new Email();
 
+        if(emailAlumno == null) {
+            return;
+        }
+
         emailAlumno.createEmailWith("Confirmación de alta de alumno", alumno.getEmailContacto(),"El alumno "
                 + alumno.getNombre() + " " + alumno.getApellido() + " " + "fue dado de alta correctamente.");
 
@@ -43,6 +47,10 @@ public class Alumno {
 
     public void enviarMailConfirmacionDeEliminacion(Alumno alumno, String nombreCurso) {
         Email emailAlumno = new Email();
+
+        if(emailAlumno == null) {
+            return;
+        }
 
         emailAlumno.createEmailWith("Alumno removido", alumno.getEmailContacto(),"El alumno "
                 + alumno.getNombre() + " " + alumno.getApellido() + " " + "fue removido correctamente del Curso "
@@ -55,6 +63,13 @@ public class Alumno {
 
     public void enviarMailConfirmacionNotificacion(Alumno alumno, String nombreCurso, String comunicacion) {
         Email emailAlumno = new Email();
+        String emailContacto = alumno.getEmailContacto();
+        System.out.println("");
+        System.out.println(emailContacto);
+        System.out.println("");
+        if(emailContacto == null) {
+            return;
+        }
 
         emailAlumno.createEmailWith("Nueva comunicación", alumno.getEmailContacto(),"Una nueva "
                 + "comunicación para el Curso " + nombreCurso + " " + "fue creada con la siguiente información: "
